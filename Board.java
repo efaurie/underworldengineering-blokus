@@ -29,16 +29,19 @@ public class Board {
 	private void printHorizontalBoarder() {
 		System.out.print(" ");
 		for(int i = 0; i < 20; i++) {
-			System.out.print("--");
+			System.out.print("---");
 		}
 		System.out.print("\n");
 	}
 	
 	private void printRows() {
 		for(int j = 0; j < BOARD_DIMENSION; j++) {
-			System.out.print("| ");
+			System.out.print("|");
 			for(int i = 0; i < BOARD_DIMENSION; i++) {
-				System.out.print(boardMatrix[i][j] + " ");
+				if(boardMatrix[i][j] != 0)
+					System.out.print("[" + boardMatrix[i][j] + "]");
+				else
+					System.out.print(" " + boardMatrix[i][j] + " ");
 			}
 			System.out.print("|\n");
 		}
