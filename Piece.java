@@ -29,6 +29,18 @@ public abstract class Piece {
 		}
 	}
 	
+	public void mirrorOverVertical() {
+		for(int i = 0; i < dimension / 2; i++) {
+			swapColumns(i, (dimension - 1) - i);
+		}
+	}
+	
+	public void mirrorOverHorizontal() {
+		for(int i = 0; i < dimension / 2; i++) {
+			swapRows(i, (dimension - 1) - i);
+		}
+	}
+	
 	private void transposeMatrix() {
 		int[][] transposedMatrix = new int[dimension][dimension];
 		for(int j = 0; j < dimension; j++) {
@@ -37,7 +49,6 @@ public abstract class Piece {
 			}
 		}
 		matrixRepresentation = transposedMatrix;
-		printMatrix();
 	}
 	
 	private void swapColumns(int column1, int column2) {

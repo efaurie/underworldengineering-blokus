@@ -21,7 +21,7 @@ public class Test {
 		testBoard = new Board();
 		generatePieces();
 		printPieces();
-		//testBoard.printBoard();
+		testBoard.printBoard();
 	}
 	
 	public static void generatePieces() {
@@ -75,7 +75,7 @@ public class Test {
 		}
 	}
 	
-	private static void printPieces() {
+	private static void printPieces() {	
 		for(Pentomino current : pentominoes) {
 			current.printMatrix();
 			System.out.println();
