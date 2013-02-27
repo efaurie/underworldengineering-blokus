@@ -21,29 +21,57 @@ public class Board {
 	}
 	
 	public void printBoard() {
-		printHorizontalBoarder();
+		printHorizontalTopBoarder();
 		printRows();
-		printHorizontalBoarder();
+		printHorizontalBottomBoarder();
 	}
 	
-	private void printHorizontalBoarder() {
-		System.out.print(" ");
+	private void printHorizontalTopBoarder() {
+		System.out.print("    ");
+		for(int i = 0; i < 20; i++) {
+			if(i < 10)
+				System.out.print(" " + i + " ");
+			else
+				System.out.print(" " + i);
+		}
+		System.out.print("\n    ");
 		for(int i = 0; i < 20; i++) {
 			System.out.print("---");
 		}
 		System.out.print("\n");
 	}
 	
+	private void printHorizontalBottomBoarder() {
+		System.out.print("    ");
+		for(int i = 0; i < 20; i++) {
+			System.out.print("---");
+		}
+		System.out.print("\n    ");
+		for(int i = 0; i < 20; i++) {
+			if(i < 10)
+				System.out.print(" " + i + " ");
+			else
+				System.out.print(" " + i);
+		}
+		System.out.print("\n");
+	}
+	
 	private void printRows() {
 		for(int j = 0; j < BOARD_DIMENSION; j++) {
-			System.out.print("|");
+			if(j < 10)
+				System.out.print(j + "  |");
+			else
+				System.out.print(j + " |");
 			for(int i = 0; i < BOARD_DIMENSION; i++) {
 				if(boardMatrix[i][j] != 0)
 					System.out.print("[" + boardMatrix[i][j] + "]");
 				else
 					System.out.print(" " + boardMatrix[i][j] + " ");
 			}
-			System.out.print("|\n");
+			if(j < 10)
+				System.out.print("|  " + j + "\n");
+			else
+				System.out.print("| " + j + "\n");
 		}
 	}
 	
