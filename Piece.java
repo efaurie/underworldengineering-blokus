@@ -87,6 +87,25 @@ public class Piece {
 		System.out.print("\n");
 	}
 	
+	public void printPieceWithCoords() {
+		System.out.print("  ");
+		for(int i = 0; i < matrix.length; i++) {
+			System.out.print(i + " ");
+		}
+		System.out.print("\n");
+		for(int i = 0; i < matrix[0].length; i++) {
+			System.out.print(i + " ");
+			for(int j = 0; j < matrix.length; j++) {
+				if(matrix[j][i] == 1)
+					System.out.print("[]");
+				else
+					System.out.print("  ");
+			}
+			System.out.print("\n");
+		}
+		System.out.print("\n");
+	}
+	
 	public int getScoreValue() {
 		return scoreValue;
 	}

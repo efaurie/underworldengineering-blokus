@@ -78,7 +78,7 @@ public class Game {
 		System.out.print("Place piece with ID: ");
 		int selection = Integer.parseInt(input.nextLine());
 		Piece activePiece = players[player].getPiece(selection);
-		activePiece.printPiece();
+		activePiece.printPieceWithCoords();
 		boolean positioning = true;
 		while(positioning) {
 			selection = printRotationMenu();
@@ -99,7 +99,8 @@ public class Game {
 				positioning = false;
 				break;
 			}
-			activePiece.printPiece();
+			gameBoard.printBoard();
+			activePiece.printPieceWithCoords();
 		}
 		System.out.print("\nPlace Piece (p_column, p_row, b_column, b_row): ");
 		String inString = input.nextLine();
