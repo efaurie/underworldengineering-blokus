@@ -27,10 +27,10 @@ public class Lottery<E> {
 	}
 	
 	public E getNext() {
-		if(currentIndex >= array.length)
-			return null;
-		else {
-			return array[currentIndex++];
+		if(currentIndex >= array.length) {
+			shuffle();
+			currentIndex = 0;
 		}
+		return array[currentIndex++];
 	}
 }
