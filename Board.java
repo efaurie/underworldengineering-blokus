@@ -75,11 +75,14 @@ public class Board {
 		}
 	}
 	
-	public void placePiece(int player, int squares, int[][] piece, int pieceCol, int pieceRow,
+	public boolean placePiece(int player, int squares, int[][] piece, int pieceCol, int pieceRow,
 			int boardCol, int boardRow) {
 		int[][] positions = translateToPositions(squares, piece, pieceCol, pieceRow, boardCol, boardRow);
-		if(isValidPlacement(player, positions))
+		if(isValidPlacement(player, positions)) {
 			markPiece(player, positions);
+			return true;
+		} else 
+			return false;
 	}
 	
 	private void markPiece(int player, int[][] positions) {

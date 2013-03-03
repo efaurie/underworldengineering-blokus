@@ -68,6 +68,34 @@ public class Game {
 	}
 	
 	private static void placePiece(int player) {
+		boolean donePlacing = false;
+		while (!donePlacing) {
+			printPiecePool(player);
+			System.out.print("Place piece with ID: ");
+			int selection = Integer.parseInt(input.nextLine());
+			Piece activePiece = players[player].getPiece(selection);
+			positionPiece(activePiece);
+			System.out.print("\nPlace Piece (Piece Column, Piece Row, Board Column, Board Row): ");
+			String inString = input.nextLine();
+			String[] inArray = inString.split(",");
+			int[] points = new int[4];
+			for(int i = 0; i < 4; i++) {
+				inArray[i] = inArray[i].trim();
+				points[i] = Integer.parseInt(inArray[i]);
+			}
+			donePlacing = gameBoard.placePiece(player+1, activePiece.getNumSquares(), activePiece.getMatrix(),
+						points[0], points[1],
+						points[2], points[3]);
+			if(donePlacing) {
+				players[player].removePiece(activePiece);
+				System.out.println("Your piece was placed!");
+			} else {
+				System.out.println("You can't put that there! Try Again...");
+			}
+		}
+	}
+	
+	private static void printPiecePool(int player) {
 		System.out.println("Pieces in Pool: \n");
 		Iterator<Piece> pool = players[player].getPieceIterator();
 		for(int i = 0; i < players[player].getNumPiecesRemaining(); i++) {
@@ -75,13 +103,14 @@ public class Game {
 			pool.next().printPiece();
 			System.out.println();
 		}
-		System.out.print("Place piece with ID: ");
-		int selection = Integer.parseInt(input.nextLine());
-		Piece activePiece = players[player].getPiece(selection);
+	}
+	
+	private static void positionPiece(Piece activePiece) {
+		gameBoard.printBoard();
 		activePiece.printPieceWithCoords();
 		boolean positioning = true;
 		while(positioning) {
-			selection = printRotationMenu();
+			int selection = printRotationMenu();
 			switch(selection) {
 			case 1:
 				activePiece.rotateClockwise();
@@ -102,17 +131,6 @@ public class Game {
 			gameBoard.printBoard();
 			activePiece.printPieceWithCoords();
 		}
-		System.out.print("\nPlace Piece (p_column, p_row, b_column, b_row): ");
-		String inString = input.nextLine();
-		String[] inArray = inString.split(",");
-		int[] points = new int[4];
-		for(int i = 0; i < 4; i++) {
-			points[i] = Integer.parseInt(inArray[i]);
-		}
-		gameBoard.placePiece(player+1, activePiece.getNumSquares(), activePiece.getMatrix(),
-				points[0], points[1],
-				points[2], points[3]);
-		players[player].removePiece(activePiece);
 	}
 	
 	private static int printRotationMenu() {
