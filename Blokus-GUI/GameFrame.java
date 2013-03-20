@@ -1,15 +1,16 @@
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
 
-public class GameFrame extends JFrame implements ActionListener {
+public class GameFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
+	
+	GameData game;
 
-	public GameFrame() {
+	public GameFrame(GameData game) {
 		super();
+		this.game = game;
 		init();
 		addMenubar();
 		displayFrame();
@@ -24,7 +25,7 @@ public class GameFrame extends JFrame implements ActionListener {
 	}
 	
 	private void addMenubar() {
-		GameMenuBar gameBar = new GameMenuBar();
+		GameMenuBar gameBar = new GameMenuBar(game);
 		setJMenuBar(gameBar);
 	}
 	
@@ -35,12 +36,12 @@ public class GameFrame extends JFrame implements ActionListener {
 	
 	private void showSplash() {
 		setContentPane(new SplashScreen());
+		repaint();
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	
+	public void play() {
+		add(new BoardPanel());
+		repaint();
 	}
 
 }

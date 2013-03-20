@@ -1,3 +1,6 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -5,9 +8,11 @@ import javax.swing.JMenuItem;
 
 public class GameMenuBar extends JMenuBar {
 	private static final long serialVersionUID = 1L;
+	GameData game;
 
-	public GameMenuBar() {
+	public GameMenuBar(GameData game) {
 		super();
+		this.game = game;
 		addMenus();
 	}
 	
@@ -37,7 +42,9 @@ public class GameMenuBar extends JMenuBar {
 		JMenu multiPlayer = new JMenu("Multiplayer");
 		
 		JMenuItem startGame = new JMenuItem("Start Game");
+		addStartGameListener(startGame);
 		JMenuItem options = new JMenuItem("Multiplayer Options");
+		addOptionsListener(options);
 		
 		multiPlayer.add(startGame);
 		multiPlayer.add(options);
@@ -59,6 +66,26 @@ public class GameMenuBar extends JMenuBar {
 		return netPlay;
 	}
 	
-	
+	private void addStartGameListener(JMenuItem startGame) {
+		startGame.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Hitting start!");
+				game.start();
+			}
+			
+		});
+	}
+	
+	private void addOptionsListener(JMenuItem options) {
+		options.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+			
+		});
+	}
 }
