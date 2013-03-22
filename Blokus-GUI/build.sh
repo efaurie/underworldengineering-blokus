@@ -14,12 +14,16 @@ echo compiling BoardPanel.java
 javac BoardPanel.java
 echo compiling PiecePanel.java
 javac PiecePanel.java
+echo compiling GamePlayPanel.java
+javac GamePlayPanel.java
 echo compiling GameMenuBar.java
 javac GameMenuBar.java
 echo compiling GameFrame.java
 javac GameFrame.java
-echo compiling GameData.java
-javac GameData.java
+echo compiling GameController.java
+javac GameController.java
+echo compiling GuiActionTranslator.java
+javac GuiActionTranslator.java
 echo compiling Start.java
 javac Start.java
 echo
