@@ -4,13 +4,17 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 
 
-public class BoardPanel extends JPanel {
+public class GamePlayPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
-	public BoardPanel() {
+	private BoardPanel board;
+	private PiecePanel pieces;
+
+	public GamePlayPanel() {
 		super();
-		setPreferredSize(new Dimension(500, 500));
 		setBackground(Color.BLACK);
+		setPreferredSize(new Dimension(500, 500));
 		setVisible(true);
 	}
+
 }

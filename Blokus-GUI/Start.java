@@ -2,7 +2,9 @@
 public class Start {
 	
 	public static void main(String[] args) {
-		GameData game = new GameData();
+		GameController game = new GameController();
+		GuiActionTranslator translator = new GuiActionTranslator(game);
+		GameFrame frame = new GameFrame(translator);
 	}
 
 }

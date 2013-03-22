@@ -7,6 +7,7 @@ public class Player {
 	
 	private int id;
 	private Color controlledColor;
+	private String name;
 	private ArrayList<Piece> pieces;
 	private int numPiecesRemaining;
 	private boolean monoLastPiece;
@@ -15,6 +16,7 @@ public class Player {
 	
 	public Player(int playerID, Color playerColor) {
 		id = playerID;
+		name = "Player " + playerID;
 		controlledColor = playerColor;
 		monoLastPiece = false;
 		timeInControl = 0;
@@ -76,6 +78,14 @@ public class Player {
 	
 	public int getNumPiecesRemaining() {
 		return numPiecesRemaining;
+	}
+	
+	public void setName(String newName) {
+		name = newName;
+	}
+	
+	public String getName() {
+		return name;
 	}
 
 }

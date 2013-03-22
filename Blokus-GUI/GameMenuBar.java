@@ -8,11 +8,11 @@ import javax.swing.JMenuItem;
 
 public class GameMenuBar extends JMenuBar {
 	private static final long serialVersionUID = 1L;
-	GameData game;
+	GuiActionTranslator translator;
 
-	public GameMenuBar(GameData game) {
+	public GameMenuBar(GuiActionTranslator translator) {
 		super();
-		this.game = game;
+		this.translator = translator;
 		addMenus();
 	}
 	
@@ -42,9 +42,9 @@ public class GameMenuBar extends JMenuBar {
 		JMenu multiPlayer = new JMenu("Multiplayer");
 		
 		JMenuItem startGame = new JMenuItem("Start Game");
-		addStartGameListener(startGame);
+		addMPStartGameListener(startGame);
 		JMenuItem options = new JMenuItem("Multiplayer Options");
-		addOptionsListener(options);
+		addMPOptionsListener(options);
 		
 		multiPlayer.add(startGame);
 		multiPlayer.add(options);
@@ -66,24 +66,24 @@ public class GameMenuBar extends JMenuBar {
 		return netPlay;
 	}
 	
-	private void addStartGameListener(JMenuItem startGame) {
+	private void addMPStartGameListener(JMenuItem startGame) {
 		startGame.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("Hitting start!");
-				game.start();
+				translator.multiplayStartGameAction();
 			}
 			
 		});
 	}
 	
-	private void addOptionsListener(JMenuItem options) {
+	private void addMPOptionsListener(JMenuItem options) {
 		options.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+				translator.multiplayOptionsAction();
 			}
 			
 		});

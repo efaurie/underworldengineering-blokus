@@ -14,7 +14,7 @@ public class SplashScreen extends JComponent {
 	
 	public SplashScreen() {
 		try {
-			URL picLocation = SplashScreen.class.getResource("/splash.png");
+			URL picLocation = SplashScreen.class.getResource("/res/splash.png");
 			splash = ImageIO.read(picLocation);
 		} catch(IOException ioe) {
 			System.out.println("Eh oh! The Splash image wasn't found!");

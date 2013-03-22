@@ -20,61 +20,6 @@ public class Board {
 		}
 	}
 	
-	public void printBoard() {
-		printHorizontalTopBoarder();
-		printRows();
-		printHorizontalBottomBoarder();
-	}
-	
-	private void printHorizontalTopBoarder() {
-		System.out.print("    ");
-		for(int i = 0; i < 20; i++) {
-			if(i < 10)
-				System.out.print(" " + i + " ");
-			else
-				System.out.print(" " + i);
-		}
-		System.out.print("\n    ");
-		for(int i = 0; i < 20; i++) {
-			System.out.print("---");
-		}
-		System.out.print("\n");
-	}
-	
-	private void printHorizontalBottomBoarder() {
-		System.out.print("    ");
-		for(int i = 0; i < 20; i++) {
-			System.out.print("---");
-		}
-		System.out.print("\n    ");
-		for(int i = 0; i < 20; i++) {
-			if(i < 10)
-				System.out.print(" " + i + " ");
-			else
-				System.out.print(" " + i);
-		}
-		System.out.print("\n");
-	}
-	
-	private void printRows() {
-		for(int j = 0; j < BOARD_DIMENSION; j++) {
-			if(j < 10)
-				System.out.print(j + "  |");
-			else
-				System.out.print(j + " |");
-			for(int i = 0; i < BOARD_DIMENSION; i++) {
-				if(boardMatrix[i][j] != 0)
-					System.out.print("[" + boardMatrix[i][j] + "]");
-				else
-					System.out.print(" " + boardMatrix[i][j] + " ");
-			}
-			if(j < 10)
-				System.out.print("|  " + j + "\n");
-			else
-				System.out.print("| " + j + "\n");
-		}
-	}
-	
 	public boolean placePiece(int player, int squares, int[][] piece, int pieceCol, int pieceRow,
 			int boardCol, int boardRow) {
 		int[][] positions = translateToPositions(squares, piece, pieceCol, pieceRow, boardCol, boardRow);

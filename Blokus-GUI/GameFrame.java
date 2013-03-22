@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -6,11 +7,11 @@ import javax.swing.JFrame;
 public class GameFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
-	GameData game;
+	GuiActionTranslator translator;
 
-	public GameFrame(GameData game) {
+	public GameFrame(GuiActionTranslator translator) {
 		super();
-		this.game = game;
+		this.translator = translator;
 		init();
 		addMenubar();
 		displayFrame();
@@ -25,7 +26,7 @@ public class GameFrame extends JFrame {
 	}
 	
 	private void addMenubar() {
-		GameMenuBar gameBar = new GameMenuBar(game);
+		GameMenuBar gameBar = new GameMenuBar(translator);
 		setJMenuBar(gameBar);
 	}
 	
@@ -40,7 +41,8 @@ public class GameFrame extends JFrame {
 	}
 	
 	public void play() {
-		add(new BoardPanel());
+		setLayout(new BorderLayout());
+		add(new GamePlayPanel(), BorderLayout.CENTER);
 		repaint();
 	}
 
