@@ -12,8 +12,20 @@ echo compiling SplashScreen.java
 javac SplashScreen.java
 echo compiling BoardPanel.java
 javac BoardPanel.java
+echo compiling PieceBankPanel.java
+javac PieceBankPanel.java
+echo compiling OrientationButtonPanel.java
+javac OrientationButtonPanel.java
+echo compiling OrientationPanel.java
+javac OrientationPanel.java
 echo compiling PiecePanel.java
 javac PiecePanel.java
+echo compiling PlayerScorePanel.java
+javac PlayerScorePanel.java
+echo compiling ScorePanel.java
+javac ScorePanel.java
+echo compiling GamePanel.java
+javac GamePanel.java
 echo compiling GamePlayPanel.java
 javac GamePlayPanel.java
 echo compiling GameMenuBar.java
