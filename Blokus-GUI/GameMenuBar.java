@@ -9,9 +9,11 @@ import javax.swing.JMenuItem;
 public class GameMenuBar extends JMenuBar {
 	private static final long serialVersionUID = 1L;
 	GuiActionTranslator translator;
+	GameFrame parent;
 
-	public GameMenuBar(GuiActionTranslator translator) {
+	public GameMenuBar(GameFrame parent, GuiActionTranslator translator) {
 		super();
+		this.parent = parent;
 		this.translator = translator;
 		addMenus();
 	}
@@ -73,6 +75,7 @@ public class GameMenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("Hitting start!");
 				translator.multiplayStartGameAction();
+				parent.startMPGame();
 			}
 			
 		});

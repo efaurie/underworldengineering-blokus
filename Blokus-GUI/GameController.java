@@ -60,5 +60,9 @@ public class GameController {
 	public void endGame() {
 		
 	}
+	
+	public Player getPlayer(int playerID) {
+		return players[playerID];
+	}
 
 }

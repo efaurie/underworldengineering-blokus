@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
-import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 
-public class SplashScreen extends JComponent {
+public class SplashScreen extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private Image splash;
