@@ -29,7 +29,10 @@ public class GameFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		showSplash();
-		setPreferredSize(new Dimension(1200, 800));
+		if(System.getProperty("os.name").toLowerCase().contains("windows"))
+			setPreferredSize(new Dimension(1205, 810));
+		else
+			setPreferredSize(new Dimension(1200, 800));
 		setResizable(false);
 	}
 	
