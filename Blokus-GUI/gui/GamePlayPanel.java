@@ -33,7 +33,7 @@ public class GamePlayPanel extends JPanel {
 	
 	private void addPanels() {
 		add(board, BorderLayout.SOUTH);
-		add(score, BorderLayout.NORTH);
+		add(score, BorderLayout.CENTER);
 	}
 	
 	public void updateGamePlayPanel() {
