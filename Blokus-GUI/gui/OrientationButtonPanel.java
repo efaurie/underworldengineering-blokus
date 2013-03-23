@@ -48,10 +48,10 @@ public class OrientationButtonPanel extends JPanel {
 		turn.setFocusPainted(false);
 		addTurnAction();
 		
-		add(rotateClock);
+		add(rotateCounter);
 		add(flip);
 		add(turn);
-		add(rotateCounter);
+		add(rotateClock);
 	}
 	
 	private void addRotateCounterAction() {
