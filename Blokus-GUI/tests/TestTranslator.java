@@ -1,6 +1,8 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import logic.GameController;
 import logic.GuiActionTranslator;
 
@@ -28,6 +30,27 @@ public class TestTranslator {
 		for(int i = 0; i < 4; i++) {
 			String name = translator.getPlayerName(i);
 			assertEquals(name, "Player " + (i + 1));
+		}
+	}
+	
+	@Test
+	public void testGetPlayerScore() {
+		GameController game = new GameController();
+		GuiActionTranslator translator = new GuiActionTranslator(game);
+		for(int i = 0; i < 4; i++) {
+			assertEquals(translator.getPlayerScore(i), -89);
+		}
+	}
+	
+	@Test
+	public void testGetBoardMatrix() {
+		GameController game = new GameController();
+		GuiActionTranslator translator = new GuiActionTranslator(game);
+		int[][] matrix = translator.getBoardMatrix();
+		for(int i = 0; i < 20; i++) {
+			for(int j = 0; j < 20; j++) {
+				assertEquals(matrix[i][j], 0);
+			}
 		}
 	}
 }
