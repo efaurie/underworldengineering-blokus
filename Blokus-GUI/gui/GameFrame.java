@@ -14,6 +14,7 @@ public class GameFrame extends JFrame {
 	GuiActionTranslator translator;
 	GamePanel gamePanel;
 	SplashScreen splashPanel;
+	ScoreReportPanel scoreReportPanel;
 
 	public GameFrame(GuiActionTranslator translator) {
 		super();
@@ -51,9 +52,10 @@ public class GameFrame extends JFrame {
 		add(splashPanel, BorderLayout.CENTER);
 	}
 	
-	private void showScoreScreen() {
+	public void showScoreScreen() {
 		remove(gamePanel);
-		showSplash();
+		scoreReportPanel = new ScoreReportPanel(translator);
+		add(scoreReportPanel);
 		revalidate();
 		repaint();
 	}
@@ -80,7 +82,10 @@ public class GameFrame extends JFrame {
 	}
 	
 	public void endGame() {
-		showScoreScreen();
+		remove(scoreReportPanel);
+		showSplash();
+		revalidate();
+		repaint();
 	}
 
 }
