@@ -28,7 +28,6 @@ public class Board {
 			markPiece(player, positions);
 			return true;
 		} else {
-			System.out.println("Placement wasn't valid");
 			return false;
 		}
 	}
@@ -66,7 +65,6 @@ public class Board {
 	}
 	
 	private boolean areSpacesFree(int[][] positions) {
-		System.out.println("Checking Space Free");
 		for(int i = 0; i < positions.length; i++) {
 			if(!isSpaceFree(positions[i][0], positions[i][1]))
 				return false;
@@ -86,7 +84,6 @@ public class Board {
 	}
 	
 	private boolean isCornerConditionMet(int player, int[][] positions) {
-		System.out.println("Checking Corner Condition");
 		for(int i = 0; i < positions.length; i++) {
 			if(checkCornerCondition(player, positions[i][0], positions[i][1]))
 				return true;
@@ -129,7 +126,6 @@ public class Board {
 	}
 	
 	private boolean isEdgeConditionMet(int player, int[][] positions) {
-		System.out.println("Checking Edge Condition");
 		for(int i = 0; i < positions.length; i++) {
 			if(isContactingEdge(player, positions[i][0], positions[i][1]))
 				return false;
@@ -138,7 +134,6 @@ public class Board {
 	}
 	
 	private boolean isContactingEdge(int player, int x, int y) {
-		System.out.println("Player = " + player + " x =" + x + " y =" + y);
 		if(y+1 < BOARD_DIMENSION && boardMatrix[x][y+1] == player)
 			return true;
 		else if(x+1 < BOARD_DIMENSION && boardMatrix[x+1][y] == player)
@@ -153,6 +148,21 @@ public class Board {
 	
 	public int[][] getMatrix() {
 		return boardMatrix;
+	}
+	
+	public int getCornersBlocked(int playerID) {
+		int blocked = 0;
+		for(int i = 1; i < 20; i++) {
+			for(int j = 0; j < 20; j++) {
+				if(boardMatrix[j][i] == playerID) {
+					if(j-1 >= 0 && boardMatrix[j-1][i-1] != playerID && boardMatrix[j-1][i-1] != 0)
+						blocked++;
+					if(j+1 <= 19 && boardMatrix[j+1][i-1] != playerID && boardMatrix[j+1][i-1] != 0)
+						blocked++;
+				}
+			}
+		}
+		return blocked;
 	}
 	
 }

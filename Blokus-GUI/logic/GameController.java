@@ -108,5 +108,13 @@ public class GameController {
 	public int[][] getBoardMatrix() {
 		return gameBoard.getMatrix();
 	}
+	
+	public int getCornersBlocked(int playerID) {
+		return gameBoard.getCornersBlocked(playerID);
+	}
+	
+	public long getPlayerControlTime(int playerID) {
+		return players[playerID].getTimeInControlMillis();
+	}
 
 }

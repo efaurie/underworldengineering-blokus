@@ -132,8 +132,36 @@ public class GuiActionTranslator {
 		resetCoords();
 		passesInARow = 0;
 		game.endGame();
+		frame.showScoreScreen();
+		game = new GameController();
+	}
+	
+	public void scoreScreenDoneAction() {
 		frame.endGame();
 		game = new GameController();
+	}
+	
+	public ScoreReport getReport() {
+		ScoreReport report = new ScoreReport();
+		String name;
+		String color;
+		int score, cornersBlocked;
+		long time;
+		String timeString;
+		for(int i = 0; i < 4; i++) {
+			timeString = "";
+			name = getPlayerName(i);
+			color = getPlayerColorAsString(i);
+			score = getPlayerScore(i);
+			cornersBlocked = game.getCornersBlocked(i);
+			time = game.getPlayerControlTime(i);
+			int minutes = (int)(time / 60000);
+			int seconds = (int)((time % 60000) / 1000);
+			timeString = timeString + minutes + " minutes, ";
+			timeString = timeString + seconds + " seconds";
+			report.setData(i, name, color, score, timeString, cornersBlocked);
+		}
+		return report;
 	}
 
 }

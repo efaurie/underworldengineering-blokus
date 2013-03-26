@@ -16,7 +16,6 @@ public class Player {
 	private int numPiecesRemaining;
 	private boolean monoLastPiece;
 	private long timeInControl;
-	//private int enemyCornersBlocked;
 	
 	public Player(int playerID, Color playerColor) {
 		id = playerID;
@@ -24,7 +23,6 @@ public class Player {
 		controlledColor = playerColor;
 		monoLastPiece = false;
 		timeInControl = 0;
-		//enemyCornersBlocked = 0;
 	}
 	
 	public void initPieces(PieceFactory factory) {
