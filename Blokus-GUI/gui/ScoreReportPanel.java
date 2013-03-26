@@ -62,7 +62,6 @@ public class ScoreReportPanel extends JPanel {
 	private void addContentToPanels() {
 		String[] names = report.getNames();
 		String[] times = report.getTimes();
-		int[] corners = report.getCornersBlocked();
 		int[] scores = report.getScores();
 		
 		for(int i = 0; i < 4; i++) {
@@ -71,7 +70,6 @@ public class ScoreReportPanel extends JPanel {
 			players[i].add(avatarLabel);
 			players[i].add(new JLabel(names[i]));
 			players[i].add(new JLabel("Score: " + scores[i]));
-			players[i].add(new JLabel("Corners Blocked: " + corners[i]));
 			players[i].add(new JLabel("Time In Control: " + times[i]));
 		}
 	}

@@ -39,8 +39,8 @@ public class GameController {
 	public void startGame() {
 		if(playing == false) {
 			playing = true;
-			System.out.println("Playing Woot!");
 		}
+		beginTurn();
 	}
 	
 	public void setPlayerName(int player, String newName) {
@@ -107,10 +107,6 @@ public class GameController {
 	
 	public int[][] getBoardMatrix() {
 		return gameBoard.getMatrix();
-	}
-	
-	public int getCornersBlocked(int playerID) {
-		return gameBoard.getCornersBlocked(playerID);
 	}
 	
 	public long getPlayerControlTime(int playerID) {

@@ -67,6 +67,7 @@ public class GuiActionTranslator {
 		resetCoords();
 		game.endTurn();
 		frame.updateGameFrame();
+		game.beginTurn();
 	}
 	
 	public int getCurrentPlayer() {
@@ -153,13 +154,12 @@ public class GuiActionTranslator {
 			name = getPlayerName(i);
 			color = getPlayerColorAsString(i);
 			score = getPlayerScore(i);
-			cornersBlocked = game.getCornersBlocked(i);
 			time = game.getPlayerControlTime(i);
-			int minutes = (int)(time / 60000);
-			int seconds = (int)((time % 60000) / 1000);
+			int seconds = (int) (time / 1000) % 60 ;
+			int minutes = (int) ((time / (1000*60)) % 60);
 			timeString = timeString + minutes + " minutes, ";
 			timeString = timeString + seconds + " seconds";
-			report.setData(i, name, color, score, timeString, cornersBlocked);
+			report.setData(i, name, color, score, timeString);
 		}
 		return report;
 	}

@@ -149,20 +149,4 @@ public class Board {
 	public int[][] getMatrix() {
 		return boardMatrix;
 	}
-	
-	public int getCornersBlocked(int playerID) {
-		int blocked = 0;
-		for(int i = 1; i < 20; i++) {
-			for(int j = 0; j < 20; j++) {
-				if(boardMatrix[j][i] == playerID) {
-					if(j-1 >= 0 && boardMatrix[j-1][i-1] != playerID && boardMatrix[j-1][i-1] != 0)
-						blocked++;
-					if(j+1 <= 19 && boardMatrix[j+1][i-1] != playerID && boardMatrix[j+1][i-1] != 0)
-						blocked++;
-				}
-			}
-		}
-		return blocked;
-	}
-	
 }
