@@ -77,7 +77,6 @@ public class GameMenuBar extends JMenuBar {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Hitting start!");
 				translator.multiplayStartGameAction();
 				parent.startMPGame();
 			}

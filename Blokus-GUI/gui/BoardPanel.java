@@ -81,7 +81,6 @@ public class BoardPanel extends JPanel {
 	private Point translateToCoord(int x, int y) {
 		int xCoord = x / SCALED_BLOCK_WIDTH;
 		int yCoord = y / SCALED_BLOCK_HEIGHT;
-		System.out.println("Clicked on Board Coord: (" + xCoord + ", " + yCoord + ")");
 		return new Point(xCoord, yCoord);
 	}
 	

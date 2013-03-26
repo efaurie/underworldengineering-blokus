@@ -97,13 +97,11 @@ public class GuiActionTranslator {
 	
 	public void pieceCoordsSelected(Point coords) {
 		pieceCoords = coords;
-		System.out.println("Piece Coords Set...");
 	}
 	
 	public void boardCoordsSelected(Point coords) {
 		if(pieceCoords != null) {
 			boardCoords = coords;
-			System.out.println("Board Coords Set...");
 			int pieceX = (int)pieceCoords.getX();
 			int pieceY = (int)pieceCoords.getY();
 			int boardX = (int)boardCoords.getX();
@@ -116,8 +114,6 @@ public class GuiActionTranslator {
 				passesInARow = 0;
 				endTurnAction();
 			}
-			else
-				System.out.println("It wasn't placed...");
 		}
 	}
 	public int[][] getBoardMatrix() {

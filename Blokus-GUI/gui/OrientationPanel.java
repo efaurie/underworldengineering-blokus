@@ -160,7 +160,6 @@ public class OrientationPanel extends JPanel {
 		int yBuffer = currentPiece.getHeight() / SCALED_BLOCK_HEIGHT;
 		int xCoord = x / (SCALED_BLOCK_WIDTH + xBuffer);
 		int yCoord = y / (SCALED_BLOCK_HEIGHT + yBuffer);
-		System.out.println("Clicked on Piece Coord: (" + xCoord + ", " + yCoord + ")");
 		return new Point(xCoord, yCoord);
 	}
 

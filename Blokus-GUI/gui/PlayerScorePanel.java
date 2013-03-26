@@ -87,7 +87,6 @@ public class PlayerScorePanel extends JPanel {
 	private void registerButtonListener() {
 		passButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Pass Clicked!");
 				translator.passAction();
 				updateInfo();
 				releaseActive();
