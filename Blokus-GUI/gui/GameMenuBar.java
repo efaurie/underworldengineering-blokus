@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import logic.GuiActionTranslator;
 
@@ -26,10 +27,12 @@ public class GameMenuBar extends JMenuBar {
 		JMenu singlePlayer = buildSinglePlayerMenu();
 		JMenu multiPlayer = buildMultiPlayerMenu();
 		JMenu netPlay = buildNetPlayMenu();
+		JMenu help = buildHelpMenu();
 		
 		add(singlePlayer);
 		add(multiPlayer);
 		add(netPlay);
+		add(help);
 	}
 	
 	private JMenu buildSinglePlayerMenu() {
@@ -72,6 +75,19 @@ public class GameMenuBar extends JMenuBar {
 		return netPlay;
 	}
 	
+	private JMenu buildHelpMenu() {
+		JMenu help = new JMenu("Help");
+		
+		JMenuItem howToPlay = new JMenuItem("How To Play");
+		JMenuItem about = new JMenuItem("About");
+		addHelpAboutListener(about);
+		
+		help.add(howToPlay);
+		help.add(about);
+		
+		return help;
+	}
+	
 	private void addMPStartGameListener(JMenuItem startGame) {
 		startGame.addActionListener(new ActionListener() {
 
@@ -90,6 +106,20 @@ public class GameMenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				translator.multiplayOptionsAction();
+			}
+			
+		});
+	}
+	
+	private void addHelpAboutListener(JMenuItem about) {
+		about.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String info = "Blokus" + 
+							  "\n\nAuthors:\n   Eric Faurie\n   Stephen Felix\n   William Bafia\n   Khoi Nguyen" +
+							  "\n\nDate:\n  26 MAR 2013";
+				JOptionPane.showMessageDialog(null, info, "About", JOptionPane.INFORMATION_MESSAGE);
 			}
 			
 		});
