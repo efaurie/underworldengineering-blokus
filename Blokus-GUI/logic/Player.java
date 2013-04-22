@@ -9,16 +9,24 @@ import java.util.Iterator;
 
 public class Player {
 	
+	private static final int DEFAULT_TIMEOUT = 10;
+	private static final int DEFAULT_PLAYER_RANK = 1;
+	
 	private int id;
 	private Color controlledColor;
 	private String name;
+	private PlayTimer timer;
 	private ArrayList<Piece> pieces;
 	private int numPiecesRemaining;
 	private boolean monoLastPiece;
 	private long timeInControl;
 	
+	private int playerRank;
+	
 	public Player(int playerID, Color playerColor) {
 		id = playerID;
+		playerRank = DEFAULT_PLAYER_RANK;
+		timer = new PlayTimer(DEFAULT_TIMEOUT);
 		name = "Player " + (playerID + 1);
 		controlledColor = playerColor;
 		monoLastPiece = false;
@@ -54,6 +62,18 @@ public class Player {
 	
 	public void addTurnLength(long turnLength) {
 		timeInControl += turnLength;
+	}
+	
+	public void startTimer() {
+		timer.start();
+	}
+	
+	public void stopTimer() {
+		timer.stop();
+	}
+	
+	public void setTimeout(int timeout) {
+		timer.setTimeout(timeout);
 	}
 	
 	public long getTimeInControlMillis() {
@@ -95,6 +115,14 @@ public class Player {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public void setRank(int newRank) {
+		playerRank = newRank;
+	}
+	
+	public int getRank() {
+		return playerRank;
 	}
 
 }

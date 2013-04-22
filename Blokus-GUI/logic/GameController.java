@@ -49,9 +49,11 @@ public class GameController {
 	
 	public void beginTurn() {
 		startTime = System.currentTimeMillis();
+		players[currentPlayer].startTimer();
 	}
 	
 	public void endTurn() {
+		players[currentPlayer].stopTimer();
 		endTime = System.currentTimeMillis();
 		players[currentPlayer].addTurnLength(endTime - startTime);
 		activePiece = null;
