@@ -22,8 +22,10 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import logic.GuiActionTranslator;
+import logic.PlayTimer;
 
 
 public class OrientationPanel extends JPanel {
@@ -32,6 +34,9 @@ public class OrientationPanel extends JPanel {
 	private static final int SCALED_BLOCK_WIDTH = (int)(10 * SCALE);
 	private static final int SCALED_BLOCK_HEIGHT = (int)(10 * SCALE);
 	
+	PlayTimer timer;
+	int counter;
+	
 	GuiActionTranslator translator;
 	BufferedImage pieceImage;
 	ImageIcon scaledImage;
@@ -39,11 +44,13 @@ public class OrientationPanel extends JPanel {
 	String locationString;
 	JPanel labelPanel;
 	JLabel currentPiece;
+	JLabel clock;
 	
 	public OrientationPanel(GuiActionTranslator translator) {
 		this.translator = translator;
 		init();
 		addContent();
+		updateOrientationPanel();
 	}
 	
 	private void init() {
@@ -53,6 +60,11 @@ public class OrientationPanel extends JPanel {
 	}
 	
 	private void addContent() {
+		clock = new JLabel();
+		clock.setForeground(Color.WHITE);
+		clock.setHorizontalAlignment(SwingConstants.CENTER);
+		add(clock, BorderLayout.NORTH);
+		
 		labelPanel = new JPanel();
 		labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.Y_AXIS));
 		labelPanel.setBackground(Color.BLACK);
@@ -71,8 +83,27 @@ public class OrientationPanel extends JPanel {
 	}
 	
 	public void updateOrientationPanel() {
+		timerReset();
 		currentPiece.setIcon(null);
 		scaledImage = null;
+	}
+	
+	private void timerReset() {
+		timer = translator.getPlayerTimer();
+		timer.registerListener(this);
+		counter = timer.getTimeout();
+		updateClock();
+	}
+	
+	public void timerTick() {
+		counter--;
+		updateClock();
+	}
+	
+	private void updateClock() {
+		String text = "Play Time: ";
+		text = text + counter;
+		clock.setText(text);
 	}
 	
 	public void makePieceActive(int pieceID, String color) {

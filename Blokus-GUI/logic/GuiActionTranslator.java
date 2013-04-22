@@ -35,6 +35,10 @@ public class GuiActionTranslator {
 		return game.getPlayer(playerID);
 	}
 	
+	public PlayTimer getPlayerTimer() {
+		return game.getCurrentPlayer().getTimer();
+	}
+	
 	public String getPlayerColorAsString(int playerID) {
 		Color playerColor = getPlayerInfo(playerID).getColor();
 		if(playerColor == Color.BLUE)
@@ -142,7 +146,7 @@ public class GuiActionTranslator {
 		ScoreReport report = new ScoreReport();
 		String name;
 		String color;
-		int score, cornersBlocked;
+		int score;
 		long time;
 		String timeString;
 		for(int i = 0; i < 4; i++) {

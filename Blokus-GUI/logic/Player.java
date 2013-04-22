@@ -5,11 +5,9 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
-
 public class Player {
 	
-	private static final int DEFAULT_TIMEOUT = 10;
+	private static final int DEFAULT_TIMEOUT = 60;
 	private static final int DEFAULT_PLAYER_RANK = 1;
 	
 	private int id;
@@ -70,6 +68,10 @@ public class Player {
 	
 	public void stopTimer() {
 		timer.stop();
+	}
+	
+	public PlayTimer getTimer() {
+		return timer;
 	}
 	
 	public void setTimeout(int timeout) {

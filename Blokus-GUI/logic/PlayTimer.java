@@ -1,5 +1,7 @@
 package logic;
 
+import gui.OrientationPanel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,6 +15,7 @@ public class PlayTimer {
 	private int timeout;
 	private int tickCounter;
 	private ActionListener tick;
+	private OrientationPanel panel;
 	
 	public PlayTimer(int defaultTimeout) {
 		timeout = defaultTimeout;
@@ -37,6 +40,14 @@ public class PlayTimer {
 		clock.stop();
 	}
 	
+	public int getTimeout() {
+		return timeout;
+	}
+	
+	public void registerListener(OrientationPanel panel) {
+		this.panel = panel;
+	}
+	
 	private void registerTickAction() {
 		tick = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -44,6 +55,9 @@ public class PlayTimer {
 					System.out.println("Timeout!");
 					clock.stop();
 				} else {
+					if(panel != null) {
+						panel.timerTick();
+					}
 					System.out.println("Tick " + tickCounter);
 					tickCounter++;
 				}
