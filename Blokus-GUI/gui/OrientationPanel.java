@@ -90,7 +90,7 @@ public class OrientationPanel extends JPanel {
 	
 	private void timerReset() {
 		timer = translator.getPlayerTimer();
-		timer.registerListener(this);
+		timer.registerPanelListener(this);
 		counter = timer.getTimeout();
 		updateClock();
 	}
@@ -98,6 +98,12 @@ public class OrientationPanel extends JPanel {
 	public void timerTick() {
 		counter--;
 		updateClock();
+	}
+	
+	public void timerTimeout() {
+		clock.setText("Timeout!");
+		System.out.println("Timeout!");
+		translator.playerTimeoutAction();
 	}
 	
 	private void updateClock() {

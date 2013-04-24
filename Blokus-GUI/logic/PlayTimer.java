@@ -15,6 +15,7 @@ public class PlayTimer {
 	private int timeout;
 	private int tickCounter;
 	private ActionListener tick;
+	
 	private OrientationPanel panel;
 	
 	public PlayTimer(int defaultTimeout) {
@@ -44,7 +45,7 @@ public class PlayTimer {
 		return timeout;
 	}
 	
-	public void registerListener(OrientationPanel panel) {
+	public void registerPanelListener(OrientationPanel panel) {
 		this.panel = panel;
 	}
 	
@@ -52,13 +53,12 @@ public class PlayTimer {
 		tick = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(tickCounter >= timeout) {
-					System.out.println("Timeout!");
 					clock.stop();
+					panel.timerTimeout();
 				} else {
 					if(panel != null) {
 						panel.timerTick();
 					}
-					System.out.println("Tick " + tickCounter);
 					tickCounter++;
 				}
 			}

@@ -8,6 +8,7 @@ import java.awt.Point;
 public class GuiActionTranslator {
 	
 	private GameController game;
+	private TimeoutPolicy timePolicy;
 	private GameFrame frame;
 	private Point pieceCoords;
 	private Point boardCoords;
@@ -16,6 +17,7 @@ public class GuiActionTranslator {
 	public GuiActionTranslator(GameController game) {
 		this.game = game;
 		frame = null;
+		timePolicy = new TimeoutPolicy(game, this);
 		resetCoords();
 	}
 	
@@ -72,6 +74,15 @@ public class GuiActionTranslator {
 		game.endTurn();
 		frame.updateGameFrame();
 		game.beginTurn();
+	}
+	
+	public void playerTimeoutAction() {
+		timePolicy.timeoutAction();
+	}
+	
+	public void timeoutEndTurnAction() {
+		resetCoords();
+		frame.updateGameFrame();
 	}
 	
 	public int getCurrentPlayer() {

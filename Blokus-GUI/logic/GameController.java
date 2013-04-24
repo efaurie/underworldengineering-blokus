@@ -15,8 +15,13 @@ public class GameController {
 	private Board gameBoard;
 	private Player[] players;
 	private long startTime, endTime;
+	
 	private int currentPlayer;
+	private int currentPlayerInControl;
+	private int[] controlVector;
+	
 	private Piece activePiece;
+	private int playersRemaining;
 	
 	public GameController() {
 		init();
@@ -26,13 +31,17 @@ public class GameController {
 		Lottery<Color> color = new Lottery<Color>(COLORS);
 		pieceFactory = new PieceFactory();
 		players = new Player[NUMBER_OF_PLAYERS];
+		playersRemaining = NUMBER_OF_PLAYERS;
 		currentPlayer = 0;
+		currentPlayerInControl = 0;
+		controlVector = new int[NUMBER_OF_PLAYERS];
 		
 		playing = false;
 		gameBoard = new Board();
 		for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
 			players[i] = new Player(i, color.getNext());
 			players[i].initPieces(pieceFactory);
+			controlVector[i] = i;
 		}
 	}
 	
@@ -77,6 +86,14 @@ public class GameController {
 	
 	public Player getCurrentPlayer() {
 		return players[currentPlayer];
+	}
+	
+	public void playerKicked(int replacementPlayerId) {
+		//IMPLEMENT***********
+	}
+	
+	public int getPlayersRemaining() {
+		return playersRemaining;
 	}
 	
 	public void setActivePiece(int pieceID) {
