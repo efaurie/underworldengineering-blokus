@@ -17,8 +17,6 @@ public class GameController {
 	private long startTime, endTime;
 	
 	private int currentPlayer;
-	private int currentPlayerInControl;
-	private int[] controlVector;
 	
 	private Piece activePiece;
 	private int playersRemaining;
@@ -33,15 +31,12 @@ public class GameController {
 		players = new Player[NUMBER_OF_PLAYERS];
 		playersRemaining = NUMBER_OF_PLAYERS;
 		currentPlayer = 0;
-		currentPlayerInControl = 0;
-		controlVector = new int[NUMBER_OF_PLAYERS];
 		
 		playing = false;
 		gameBoard = new Board();
 		for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
 			players[i] = new Player(i, color.getNext());
 			players[i].initPieces(pieceFactory);
-			controlVector[i] = i;
 		}
 	}
 	
@@ -69,6 +64,12 @@ public class GameController {
 		currentPlayer = (currentPlayer + 1) % NUMBER_OF_PLAYERS;
 	}
 	
+	public void resetTurn() {
+		startTime = System.currentTimeMillis();
+		players[currentPlayer].startTimer();
+		activePiece = null;
+	}
+	
 	public boolean placePiece(int pieceCol, int pieceRow, int boardCol, int boardRow) {
 		boolean wasPlaced = false;
 		wasPlaced = gameBoard.placePiece(currentPlayer + 1, activePiece.getNumSquares(), activePiece.getMatrix(),
@@ -88,8 +89,41 @@ public class GameController {
 		return players[currentPlayer];
 	}
 	
-	public void playerKicked(int replacementPlayerId) {
-		//IMPLEMENT***********
+	public void playerKicked(int replacement) {
+		
+		if(players[replacement].getControllingID() == replacement) {
+			if(players[currentPlayer].getControllingID() == currentPlayer) {
+				players[currentPlayer].setControllingID(replacement);
+				players[currentPlayer].getTimer().setTimeout(players[replacement].getTimer().getTimeout());
+				System.out.println("Player " + (replacement+1) + " is now in control of Player " + (currentPlayer + 1));
+			} else {
+				int parentID = players[currentPlayer].getControllingID();
+				players[parentID].setControllingID(replacement);
+				players[parentID].getTimer().setTimeout(players[replacement].getTimer().getTimeout());
+				players[currentPlayer].setControllingID(replacement);
+				players[currentPlayer].getTimer().setTimeout(players[replacement].getTimer().getTimeout());
+				System.out.println("Player " + (replacement+1) + " is now in control of Player " + 
+						(currentPlayer + 1) + " and " + (parentID + 1));
+			}
+		} else {
+			int trueReplacement = players[replacement].getControllingID();
+			if(players[currentPlayer].getControllingID() == currentPlayer) {
+				players[currentPlayer].setControllingID(trueReplacement);
+				players[currentPlayer].getTimer().setTimeout(players[trueReplacement].getTimer().getTimeout());
+				System.out.println("Player " + (trueReplacement+1) + " is now in control of Player " +
+						(currentPlayer + 1) + " and " + (replacement+1));
+			} else {
+				int parentID = players[currentPlayer].getControllingID();
+				players[parentID].setControllingID(trueReplacement);
+				players[parentID].getTimer().setTimeout(players[trueReplacement].getTimer().getTimeout());
+				players[currentPlayer].setControllingID(trueReplacement);
+				players[currentPlayer].getTimer().setTimeout(players[trueReplacement].getTimer().getTimeout());
+				System.out.println("Player " + (trueReplacement+1) + " is now in control of Player " + 
+						(currentPlayer + 1) + " and " + (parentID + 1) + " and " + (replacement + 1));
+			}
+		}
+		
+		playersRemaining--;
 	}
 	
 	public int getPlayersRemaining() {

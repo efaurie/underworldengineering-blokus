@@ -69,6 +69,12 @@ public class GuiActionTranslator {
 		}
 	}
 	
+	public void resetTurnAction() {
+		resetCoords();
+		game.resetTurn();
+		frame.updateGameFrame();
+	}
+	
 	public void endTurnAction() {
 		resetCoords();
 		game.endTurn();
@@ -140,7 +146,7 @@ public class GuiActionTranslator {
 		pieceCoords = null;
 	}
 	
-	private void endGame() {
+	public void endGame() {
 		resetCoords();
 		passesInARow = 0;
 		game.endGame();

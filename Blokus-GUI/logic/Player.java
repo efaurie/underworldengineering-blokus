@@ -7,10 +7,11 @@ import java.util.Iterator;
 
 public class Player {
 	
-	private static final int DEFAULT_TIMEOUT = 60;
+	private static final int DEFAULT_TIMEOUT = 10;
 	private static final int DEFAULT_PLAYER_RANK = 1;
 	
 	private int id;
+	private int controllingID;
 	private Color controlledColor;
 	private String name;
 	private PlayTimer timer;
@@ -23,6 +24,7 @@ public class Player {
 	
 	public Player(int playerID, Color playerColor) {
 		id = playerID;
+		controllingID = playerID;
 		playerRank = DEFAULT_PLAYER_RANK;
 		timer = new PlayTimer(DEFAULT_TIMEOUT);
 		name = "Player " + (playerID + 1);
@@ -113,6 +115,14 @@ public class Player {
 	
 	public void setName(String newName) {
 		name = newName;
+	}
+	
+	public void setControllingID(int newPlayerInControl) {
+		controllingID = newPlayerInControl;
+	}
+	
+	public int getControllingID() {
+		return controllingID;
 	}
 	
 	public String getName() {

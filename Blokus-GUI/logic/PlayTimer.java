@@ -34,11 +34,12 @@ public class PlayTimer {
 	}
 	
 	public void start() {
-		clock.start();
+		clock.restart();
 	}
 	
 	public void stop() {
 		clock.stop();
+		tickCounter = 0;
 	}
 	
 	public int getTimeout() {
@@ -53,7 +54,7 @@ public class PlayTimer {
 		tick = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(tickCounter >= timeout) {
-					clock.stop();
+					stop();
 					panel.timerTimeout();
 				} else {
 					if(panel != null) {
