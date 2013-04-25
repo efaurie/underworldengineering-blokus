@@ -21,6 +21,8 @@ public class GameController {
 	private Piece activePiece;
 	private int playersRemaining;
 	
+	private DatabaseInterface db;
+	
 	public GameController() {
 		init();
 	}
@@ -31,6 +33,9 @@ public class GameController {
 		players = new Player[NUMBER_OF_PLAYERS];
 		playersRemaining = NUMBER_OF_PLAYERS;
 		currentPlayer = 0;
+		
+		db = new DatabaseInterface();
+		db.connect();
 		
 		playing = false;
 		gameBoard = new Board();
@@ -164,6 +169,11 @@ public class GameController {
 	
 	public long getPlayerControlTime(int playerID) {
 		return players[playerID].getTimeInControlMillis();
+	}
+	
+	public boolean playerLogin(int id, String username, String password) {
+		
+		return false;
 	}
 
 }

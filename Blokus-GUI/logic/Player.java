@@ -7,23 +7,27 @@ import java.util.Iterator;
 
 public class Player {
 	
-	private static final int DEFAULT_TIMEOUT = 10;
+	private static final int DEFAULT_TIMEOUT = 60;
 	private static final int DEFAULT_PLAYER_RANK = 1;
 	
 	private int id;
 	private int controllingID;
 	private Color controlledColor;
-	private String name;
 	private PlayTimer timer;
 	private ArrayList<Piece> pieces;
 	private int numPiecesRemaining;
 	private boolean monoLastPiece;
 	private long timeInControl;
 	
+	private String username;
+	private String password;
+	private String name;
 	private int playerRank;
+	private int globalScore;
 	
 	public Player(int playerID, Color playerColor) {
 		id = playerID;
+		initDBdata();
 		controllingID = playerID;
 		playerRank = DEFAULT_PLAYER_RANK;
 		timer = new PlayTimer(DEFAULT_TIMEOUT);
@@ -31,6 +35,14 @@ public class Player {
 		controlledColor = playerColor;
 		monoLastPiece = false;
 		timeInControl = 0;
+	}
+	
+	private void initDBdata() {
+		username = null;
+		password = null;
+		name = "Player " + (id + 1);
+		playerRank = 1;
+		globalScore = 0;
 	}
 	
 	public void initPieces(PieceFactory factory) {
@@ -117,9 +129,33 @@ public class Player {
 		name = newName;
 	}
 	
+	public void setUserInfo(String username, String password, int score, int rank) {
+		this.username = username;
+		this.password = password;
+		globalScore = score;
+		playerRank = rank;
+	}
+	
+	public int getGlobalScore() {
+		return globalScore;
+	}
+	
+	public int getRank() {
+		return playerRank;
+	}
+	
+	public String username() {
+		return username;
+	}
+	
+	public String password() {
+		return password;
+	}
+	
 	public void setControllingID(int newPlayerInControl) {
 		controllingID = newPlayerInControl;
 	}
+	
 	
 	public int getControllingID() {
 		return controllingID;
@@ -127,14 +163,6 @@ public class Player {
 	
 	public String getName() {
 		return name;
-	}
-	
-	public void setRank(int newRank) {
-		playerRank = newRank;
-	}
-	
-	public int getRank() {
-		return playerRank;
 	}
 
 }
