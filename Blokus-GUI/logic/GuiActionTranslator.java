@@ -1,5 +1,6 @@
 package logic;
 import gui.GameFrame;
+import gui.RegistrationForm;
 
 import java.awt.Color;
 import java.awt.Point;
@@ -29,8 +30,12 @@ public class GuiActionTranslator {
 		game.startGame();
 	}
 	
-	public void multiplayOptionsAction() {
-		
+	public void registerAction() {
+		new RegistrationForm(this);
+	}
+	
+	public boolean registerUser(String username, String password, String name) {
+		return game.createPlayer(username, password, name);
 	}
 	
 	private Player getPlayerInfo(int playerID) {
@@ -95,10 +100,18 @@ public class GuiActionTranslator {
 		return game.getCurrentPlayer().getID();
 	}
 	
+	public boolean loginPlayer(int id, String username, String password) {
+		return game.playerLogin(id, username, password);
+	}
+	
 	public void piecePanelClickAction(int pieceID, String color) {
 		resetCoords();
 		frame.updateOrientationPanel(pieceID, color);
 		game.setActivePiece(pieceID);
+	}
+	
+	public void resetPlayers() {
+		game.resetPlayers();
 	}
 	
 	public void flipPiece() {
@@ -114,6 +127,14 @@ public class GuiActionTranslator {
 	public void rotatePiece(int angle) {
 		resetCoords();
 		game.rotatePiece(angle);
+	}
+	
+	public void setKindMode() {
+		timePolicy.setKickOnTimeout(false);
+	}
+	
+	public void setCruelMode() {
+		timePolicy.setKickOnTimeout(true);
 	}
 	
 	public void pieceCoordsSelected(Point coords) {

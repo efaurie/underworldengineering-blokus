@@ -1,7 +1,5 @@
 package gui;
 
- 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,7 +7,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.*;
 
 import logic.GuiActionTranslator;
 
@@ -55,11 +52,11 @@ public class GameMenuBar extends JMenuBar {
         
         JMenuItem startGame = new JMenuItem("Start Game");
         addMPStartGameListener(startGame);
-        JMenuItem options = new JMenuItem("Multiplayer Options");
-        addMPOptionsListener(options);
+        JMenuItem register = new JMenuItem("Register");
+        addRegisterListener(register);
         
         multiPlayer.add(startGame);
-        multiPlayer.add(options);
+        multiPlayer.add(register);
         
         return multiPlayer;
     }
@@ -97,19 +94,18 @@ public class GameMenuBar extends JMenuBar {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                translator.multiplayStartGameAction();
-                parent.startMPGame();
+            	new MultiplayerLoginPanel(translator, parent);
             }
             
         });
     }
     
-    private void addMPOptionsListener(JMenuItem options) {
+    private void addRegisterListener(JMenuItem options) {
         options.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                translator.multiplayOptionsAction();
+                translator.registerAction();
             }
             
         });

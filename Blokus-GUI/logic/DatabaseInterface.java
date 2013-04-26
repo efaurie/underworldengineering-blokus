@@ -67,15 +67,22 @@ public class DatabaseInterface {
 	
 	public boolean createUser(String username, String password, String playerName) {
 		try {
-			PreparedStatement pStatement = connection.prepareStatement(
-				"insert into Players values(?,?,?,?,?)");
-			pStatement.setString(1, username);
-			pStatement.setString(2, password);
-			pStatement.setString(3, playerName);
-			pStatement.setInt(4,  START_SCORE);
-			pStatement.setInt(5, START_RANK);
-			pStatement.execute();
-			return true;
+			PreparedStatement pStatement1 = connection.prepareStatement("SELECT * FROM Players WHERE username = ?");
+			pStatement1.setString(1, username);
+			ResultSet rs = pStatement1.executeQuery();
+			if(!rs.next()) {
+				PreparedStatement pStatement = connection.prepareStatement(
+						"insert into Players values(?,?,?,?,?)");
+				pStatement.setString(1, username);
+				pStatement.setString(2, password);
+				pStatement.setString(3, playerName);
+				pStatement.setInt(4,  START_SCORE);
+				pStatement.setInt(5, START_RANK);
+				pStatement.executeUpdate();
+				return true;
+			} else {
+				return false;
+			}
 		} catch (SQLException e) {
 			System.out.println("Could not add player!");
 			return false;
@@ -89,7 +96,7 @@ public class DatabaseInterface {
 			pStatement.setString(1,  username);
 			pStatement.setString(2,  password);
 			ResultSet rs = pStatement.executeQuery();
-			if(rs.first())
+			if(rs.next())
 				return rs.getString("name");
 			else
 				return null;
@@ -106,12 +113,12 @@ public class DatabaseInterface {
 			pStatement.setString(1,  username);
 			pStatement.setString(2,  password);
 			ResultSet rs = pStatement.executeQuery();
-			if(rs.first())
+			if(rs.next())
 				return rs.getInt("score");
 			else
 				return -1;
 		} catch (SQLException e) {
-			System.out.println("Could not get player name!");
+			System.out.println("Could not get player score!");
 			return -1;
 		}
 	}
@@ -123,12 +130,12 @@ public class DatabaseInterface {
 			pStatement.setString(1,  username);
 			pStatement.setString(2,  password);
 			ResultSet rs = pStatement.executeQuery();
-			if(rs.first())
+			if(rs.next())
 				return rs.getInt("rank");
 			else
 				return -1;
 		} catch (SQLException e) {
-			System.out.println("Could not get player name!");
+			System.out.println("Could not get player rank!");
 			return -1;
 		}
 	}
@@ -151,17 +158,16 @@ public class DatabaseInterface {
 	
 	public boolean loginCorrect(String username, String password) {
 		try {
-			PreparedStatement pStatement = connection.prepareStatement(
-					"select case when username=? and password=? then 'TRUE' else 'FALSE'");
+			PreparedStatement pStatement = connection.prepareStatement("select * from Players where username=? and password=?");
 			pStatement.setString(1,  username);
 			pStatement.setString(2,  password);
 			ResultSet rs = pStatement.executeQuery();
-			if(rs.first())
-				return rs.getBoolean(1);
+			if(rs.next())
+				return true;
 			else
 				return false;
 		} catch (SQLException e) {
-			System.out.println("Could not update player stats!");
+			System.out.println("Could not verify login info!");
 			return false;
 		}
 	}

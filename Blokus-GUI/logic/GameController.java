@@ -87,6 +87,18 @@ public class GameController {
 		db.disconnect();
 	}
 	
+	public void resetPlayers() {
+		Lottery<Color> color = new Lottery<Color>(COLORS);
+		pieceFactory = new PieceFactory();
+		playersRemaining = NUMBER_OF_PLAYERS;
+		currentPlayer = 0;
+		
+		for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+			players[i] = new Player(i, color.getNext());
+			players[i].initPieces(pieceFactory);
+		}
+	}
+	
 	public Player getPlayer(int playerID) {
 		return players[playerID];
 	}
