@@ -151,6 +151,7 @@ public class GuiActionTranslator {
 		passesInARow = 0;
 		game.endGame();
 		frame.showScoreScreen();
+		game.endGame();
 		game = new GameController();
 	}
 	

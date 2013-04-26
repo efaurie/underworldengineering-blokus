@@ -83,7 +83,8 @@ public class GameController {
 	}
 	
 	public void endGame() {
-		
+		updateUserStats();
+		db.disconnect();
 	}
 	
 	public Player getPlayer(int playerID) {
@@ -172,8 +173,41 @@ public class GameController {
 	}
 	
 	public boolean playerLogin(int id, String username, String password) {
-		
-		return false;
+		if(db.loginCorrect(username, password)) {
+			players[id].setName(db.getPlayerName(username, password));
+			int score = db.getPlayerScore(username, password);
+			int rank = db.getPlayerRank(username, password);
+			players[id].setUserInfo(username, password, score, rank);
+			return true;
+		} else
+			return false;
 	}
-
+	
+	public boolean createPlayer(String username, String password, String name) {
+		return db.createUser(username, password, name);
+	}
+	
+	private void updateUserStats() {
+		StatPolicy policy = new StatPolicy();
+		int[] scores = policy.calculateScores(players);
+		
+		int controllingID;
+		for(int i = 0; i < players.length; i++) {
+			controllingID = players[i].getControllingID();
+			if(!players[controllingID].isGuest()) {
+				int globalScore = players[controllingID].getGlobalScore() + scores[i];
+				players[controllingID].setGlobalScore(globalScore);
+				players[controllingID].setRank(policy.getRank(globalScore));
+			}
+		}
+		for(int i = 0; i < players.length; i++) {
+			if(!players[i].isGuest()) {
+				String username = players[i].getUsername();
+				String password = players[i].getPassword();
+				int newScore = players[i].getGlobalScore();
+				int newRank = players[i].getRank();
+				db.updatePlayerEntry(username, password, newScore, newRank);
+			}
+		}
+	}
 }

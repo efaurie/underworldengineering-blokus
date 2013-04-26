@@ -18,7 +18,9 @@ public class Player {
 	private int numPiecesRemaining;
 	private boolean monoLastPiece;
 	private long timeInControl;
+	private int numTurns;
 	
+	private boolean isGuest;
 	private String username;
 	private String password;
 	private String name;
@@ -32,12 +34,14 @@ public class Player {
 		playerRank = DEFAULT_PLAYER_RANK;
 		timer = new PlayTimer(DEFAULT_TIMEOUT);
 		name = "Player " + (playerID + 1);
+		numTurns = 0;
 		controlledColor = playerColor;
 		monoLastPiece = false;
 		timeInControl = 0;
 	}
 	
 	private void initDBdata() {
+		isGuest = true;
 		username = null;
 		password = null;
 		name = "Player " + (id + 1);
@@ -74,6 +78,7 @@ public class Player {
 	
 	public void addTurnLength(long turnLength) {
 		timeInControl += turnLength;
+		numTurns++;
 	}
 	
 	public void startTimer() {
@@ -82,6 +87,10 @@ public class Player {
 	
 	public void stopTimer() {
 		timer.stop();
+	}
+	
+	public int getNumTurns() {
+		return numTurns;
 	}
 	
 	public PlayTimer getTimer() {
@@ -134,21 +143,35 @@ public class Player {
 		this.password = password;
 		globalScore = score;
 		playerRank = rank;
+		isGuest = false;
 	}
 	
 	public int getGlobalScore() {
 		return globalScore;
 	}
 	
+	public void setGlobalScore(int newGlobal) {
+		globalScore = newGlobal;
+	}
+	
+	
+	public boolean isGuest() {
+		return isGuest;
+	}
+	
 	public int getRank() {
 		return playerRank;
 	}
 	
-	public String username() {
+	public void setRank(int newRank) {
+		playerRank = newRank;
+	}
+	
+	public String getUsername() {
 		return username;
 	}
 	
-	public String password() {
+	public String getPassword() {
 		return password;
 	}
 	

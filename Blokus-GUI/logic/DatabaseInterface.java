@@ -139,10 +139,27 @@ public class DatabaseInterface {
 					"update Players set score=?, rank=? where username=? and password=?");
 			pStatement.setInt(1, newScore);
 			pStatement.setInt(2, newRank);
-			pStatement.setString(1,  username);
-			pStatement.setString(2,  password);
+			pStatement.setString(3,  username);
+			pStatement.setString(4,  password);
 			pStatement.executeUpdate();
 			return true;
+		} catch (SQLException e) {
+			System.out.println("Could not update player stats!");
+			return false;
+		}
+	}
+	
+	public boolean loginCorrect(String username, String password) {
+		try {
+			PreparedStatement pStatement = connection.prepareStatement(
+					"select case when username=? and password=? then 'TRUE' else 'FALSE'");
+			pStatement.setString(1,  username);
+			pStatement.setString(2,  password);
+			ResultSet rs = pStatement.executeQuery();
+			if(rs.first())
+				return rs.getBoolean(1);
+			else
+				return false;
 		} catch (SQLException e) {
 			System.out.println("Could not update player stats!");
 			return false;
