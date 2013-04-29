@@ -160,8 +160,10 @@ public class MultiplayerLoginPanel {
 				if(args != null) {
 					if(!translator.loginPlayer(id, args[0], args[1]))
 						JOptionPane.showMessageDialog(new JFrame("Error"), "Something went wrong.\nLogin info incorrect.");
-					else 
+					else {
+						lockFields(id);
 						JOptionPane.showMessageDialog(new JFrame("Success"), "Log In Successful.");
+					}
 				}
 			}
 		});
@@ -181,6 +183,13 @@ public class MultiplayerLoginPanel {
 		}
 		return result;
 			
+	}
+	
+	private void lockFields(int id) {
+		int startField = 2*id;
+		argFields[startField].setEnabled(false);
+		argFields[startField+1].setEnabled(false);
+		buttons[id].setEnabled(false);
 	}
 	
 	private void registerPlayListener(JButton button) {
