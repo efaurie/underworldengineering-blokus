@@ -170,7 +170,6 @@ public class GuiActionTranslator {
 	public void endGame() {
 		resetCoords();
 		passesInARow = 0;
-		game.endGame();
 		frame.showScoreScreen();
 		game.endGame();
 		game = new GameController();

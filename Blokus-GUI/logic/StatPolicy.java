@@ -17,7 +17,12 @@ public class StatPolicy {
 		//no-op
 	}
 	
-	public int[] calculateScores(Player[] players) {
+	public int[] calculateScores(Player[] gamePlayers) {
+		Player[] players = new Player[4];
+		players[0] = gamePlayers[0];
+		players[1] = gamePlayers[1];
+		players[2] = gamePlayers[2];
+		players[3] = gamePlayers[3];
 		int[] scores = {0, 0, 0, 0};
 		//sort players in order of score
 		Arrays.sort(players, new Comparator<Player>(){
@@ -52,7 +57,7 @@ public class StatPolicy {
 		for(int i = 0; i < 4; i++) {
 			double timePerTurn = players[i].getTimeInControlSec()/players[i].getNumTurns();
 			int rank = players[i].getRank();
-			if(timePerTurn < (TIMING_BASE * TIMING_MULTIPLIERS[rank-1])*TIME_BONUS_THRESHOLD[rank])
+			if(timePerTurn < (TIMING_BASE * TIMING_MULTIPLIERS[rank-1])*TIME_BONUS_THRESHOLD[rank-1])
 				scores[i] = scores[i] + TIME_BONUS;
 		}
 		
@@ -77,7 +82,7 @@ public class StatPolicy {
 			if(score < RANK_THRESHOLDS[i])
 				return i+1;
 		}
-		return 1;
+		return 10;
 	}
 	
 	public int getTimeout(int rank) {

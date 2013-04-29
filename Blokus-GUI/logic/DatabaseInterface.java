@@ -81,6 +81,7 @@ public class DatabaseInterface {
 				pStatement.executeUpdate();
 				return true;
 			} else {
+				System.out.println("Username Taken!");
 				return false;
 			}
 		} catch (SQLException e) {
@@ -169,6 +170,18 @@ public class DatabaseInterface {
 		} catch (SQLException e) {
 			System.out.println("Could not verify login info!");
 			return false;
+		}
+	}
+	
+	public void printAll() {
+		try {
+			ResultSet rs = statement.executeQuery("select * from Players");
+			while(rs.next()) {
+				System.out.println("Username: " + rs.getString("username") + " Password: " + rs.getString("password") + 
+						" Player Name: " + rs.getString("name") + " Score: " + rs.getInt("score") + " Rank: " + rs.getInt("rank"));
+			}
+		} catch(SQLException e) {
+			System.out.println("Failed!");
 		}
 	}
 

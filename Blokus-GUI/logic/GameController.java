@@ -22,6 +22,7 @@ public class GameController {
 	private int playersRemaining;
 	
 	private DatabaseInterface db;
+	private StatPolicy stat;
 	
 	public GameController() {
 		init();
@@ -30,6 +31,7 @@ public class GameController {
 	private void init() {
 		Lottery<Color> color = new Lottery<Color>(COLORS);
 		pieceFactory = new PieceFactory();
+		stat = new StatPolicy();
 		players = new Player[NUMBER_OF_PLAYERS];
 		playersRemaining = NUMBER_OF_PLAYERS;
 		currentPlayer = 0;
@@ -201,6 +203,7 @@ public class GameController {
 			int score = db.getPlayerScore(username, password);
 			int rank = db.getPlayerRank(username, password);
 			players[id].setUserInfo(username, password, score, rank);
+			players[id].getTimer().setTimeout(stat.getTimeout(rank));
 			return true;
 		} else
 			return false;
