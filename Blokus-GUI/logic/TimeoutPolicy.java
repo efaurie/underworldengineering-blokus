@@ -1,5 +1,8 @@
 package logic;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 public class TimeoutPolicy {
 	
 	private boolean kickOnTimeout;
@@ -25,7 +28,13 @@ public class TimeoutPolicy {
 			int replacement = gui.getCurrentPlayer();
 			while(replacement == gui.getCurrentPlayer())
 				replacement = playerReplacement.getNext();
-			game.playerKicked(replacement);
+			String[] replacements = game.playerKicked(replacement);
+			String message = replacements[0] + " is now in control of";
+			for(int i = 1; i < replacements.length; i++) {
+				message = message + " " + replacements[i];
+			}
+			message = message + "!";
+			JOptionPane.showMessageDialog(new JFrame("Player Kicked"), message);
 			gui.resetTurnAction();
 			if(game.getPlayersRemaining() <= 1) {
 				gui.endGame();

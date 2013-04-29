@@ -107,13 +107,16 @@ public class GameController {
 		return players[currentPlayer];
 	}
 	
-	public void playerKicked(int replacement) {
+	public String[] playerKicked(int replacement) {
 		
 		if(players[replacement].getControllingID() == replacement) {
 			if(players[currentPlayer].getControllingID() == currentPlayer) {
 				players[currentPlayer].setControllingID(replacement);
 				players[currentPlayer].getTimer().setTimeout(players[replacement].getTimer().getTimeout());
 				System.out.println("Player " + (replacement+1) + " is now in control of Player " + (currentPlayer + 1));
+				playersRemaining--;
+				String[] replace = {players[replacement].getName(), players[currentPlayer].getName()};
+				return replace;
 			} else {
 				int parentID = players[currentPlayer].getControllingID();
 				players[parentID].setControllingID(replacement);
@@ -122,6 +125,9 @@ public class GameController {
 				players[currentPlayer].getTimer().setTimeout(players[replacement].getTimer().getTimeout());
 				System.out.println("Player " + (replacement+1) + " is now in control of Player " + 
 						(currentPlayer + 1) + " and " + (parentID + 1));
+				playersRemaining--;
+				String[] replace = {players[replacement].getName(), players[currentPlayer].getName(), players[parentID].getName()};
+				return replace;
 			}
 		} else {
 			int trueReplacement = players[replacement].getControllingID();
@@ -130,6 +136,9 @@ public class GameController {
 				players[currentPlayer].getTimer().setTimeout(players[trueReplacement].getTimer().getTimeout());
 				System.out.println("Player " + (trueReplacement+1) + " is now in control of Player " +
 						(currentPlayer + 1) + " and " + (replacement+1));
+				playersRemaining--;
+				String[] replace = {players[trueReplacement].getName(), players[currentPlayer].getName(), players[replacement].getName()};
+				return replace;
 			} else {
 				int parentID = players[currentPlayer].getControllingID();
 				players[parentID].setControllingID(trueReplacement);
@@ -138,10 +147,12 @@ public class GameController {
 				players[currentPlayer].getTimer().setTimeout(players[trueReplacement].getTimer().getTimeout());
 				System.out.println("Player " + (trueReplacement+1) + " is now in control of Player " + 
 						(currentPlayer + 1) + " and " + (parentID + 1) + " and " + (replacement + 1));
+				playersRemaining--;
+				String[] replace = {players[trueReplacement].getName(), players[currentPlayer].getName(), players[parentID].getName(),
+						players[replacement].getName()};
+				return replace;
 			}
 		}
-		
-		playersRemaining--;
 	}
 	
 	public int getPlayersRemaining() {
